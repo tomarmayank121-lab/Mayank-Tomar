@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+int main()
+{
+    int choice;
+    float balance = 0, amount;
+    int accountCreated = 0;
+
+    do {
+        printf("\n----- SIMPLE BANKING SYSTEM -----\n");
+        printf("1. Create Account\n");
+        printf("2. Deposit Money\n");
+        printf("3. Withdraw Money\n");
+        printf("4. Balance Inquiry\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                if (accountCreated == 0) {
+                    balance = 0;
+                    accountCreated = 1;
+                    printf("Account created successfully!\n");
+                } else {
+                    printf("Account already exists!\n");
+                }
+                break;
+
+            case 2:
+                if (accountCreated == 1) {
+                    printf("Enter amount to deposit: ");
+                    scanf("%f", &amount);
+                    balance += amount;
+                    printf("Amount deposited successfully.\n");
+                } else {
+                    printf("Please create an account first.\n");
+                }
+                break;
+
+            case 3:
+                if (accountCreated == 1) {
+                    printf("Enter amount to withdraw: ");
+                    scanf("%f", &amount);
+                    if (amount <= balance) {
+                        balance -= amount;
+                        printf("Withdrawal successful.\n");
+                    } else {
+                        printf("Insufficient balance!\n");
+                    }
+                } else {
+                    printf("Please create an account first.\n");
+                }
+                break;
+
+            case 4:
+                if (accountCreated == 1) {
+                    printf("Current Balance: %.2f\n", balance);
+                } else {
+                    printf("Please create an account first.\n");
+                }
+                break;
+
+            case 5:
+                printf("Thank you for using the banking system.\n");
+                break;
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+
+    } while(choice != 5);
+
+    return 0;
+}
